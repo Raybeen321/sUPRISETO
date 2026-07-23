@@ -1,50 +1,406 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-      
-        gtag('config', 'G-H87QDWEFC6');
-      </script>
-    <title>Document</title>
-    <script src="
-    https://cdn.jsdelivr.net/npm/confetti-js@0.0.18/dist/index.min.js
-    "></script>  
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>I Love You</title>
 
-    <link rel="stylesheet" href="happen.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-H87QDWEFC6');
+</script>
 
+<script src="https://cdn.jsdelivr.net/npm/confetti-js@0.0.18/dist/index.min.js"></script>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Quicksand:wght@400;500;600&display=swap" rel="stylesheet">
 
+<style>
+  :root{
+    --blush: #fdeef1;
+    --cream: #fff8f5;
+    --rose-deep: #c2185b;
+    --rose-mid: #e85d8a;
+    --rose-light: #f7b8cc;
+    --leaf: #4f7a5b;
+    --leaf-light: #7fa587;
+    --gold: #e2a857;
+    --ink: #5a3b45;
+  }
+
+  *{ box-sizing: border-box; }
+
+  body{
+    margin:0;
+    min-height:100vh;
+    background: radial-gradient(circle at 50% 0%, #fff5f7 0%, var(--blush) 45%, #f8dbe4 100%);
+    font-family:'Quicksand', sans-serif;
+    color: var(--ink);
+    overflow-x:hidden;
+    position:relative;
+  }
+
+  /* ---------- Falling petals ambiance ---------- */
+  .petal-field{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:1;
+    overflow:hidden;
+  }
+  .falling-petal{
+    position:absolute;
+    top:-40px;
+    width:14px;
+    height:14px;
+    background: var(--rose-light);
+    border-radius: 0 60% 0 60%;
+    opacity:0.8;
+    animation: fall linear infinite;
+  }
+  @keyframes fall{
+    0%   { transform: translateY(0) translateX(0) rotate(0deg); opacity:0.9; }
+    100% { transform: translateY(110vh) translateX(30px) rotate(340deg); opacity:0.2; }
+  }
+
+  /* ---------- Layout ---------- */
+  .stage{
+    position:relative;
+    z-index:2;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 30px 20px 70px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+  }
+
+  .garden-row{
+    display:flex;
+    justify-content:center;
+    align-items:flex-end;
+    gap: clamp(4px, 2vw, 18px);
+    width:100%;
+    margin: 6px 0;
+  }
+
+  /* ---------- Flower blooming ---------- */
+  .flower{
+    width: clamp(38px, 8vw, 64px);
+    height: auto;
+    transform-origin: 50% 85%;
+    animation: sway 5s ease-in-out infinite;
+  }
+  .flower .petals{
+    transform-origin: 50px 50px;
+    transform: scale(0) rotate(-25deg);
+    animation: bloom 1.1s cubic-bezier(.25,1.4,.4,1) forwards;
+  }
+  .flower .center{
+    transform-origin: 50px 50px;
+    transform: scale(0);
+    animation: bloom-center 0.8s ease-out forwards;
+  }
+  .flower:nth-of-type(1) .petals, .flower:nth-of-type(1) .center { animation-delay: 0.1s; }
+  .flower:nth-of-type(2) .petals, .flower:nth-of-type(2) .center { animation-delay: 0.35s; }
+  .flower:nth-of-type(3) .petals, .flower:nth-of-type(3) .center { animation-delay: 0.6s; }
+  .flower:nth-of-type(4) .petals, .flower:nth-of-type(4) .center { animation-delay: 0.85s; }
+  .flower:nth-of-type(5) .petals, .flower:nth-of-type(5) .center { animation-delay: 1.1s; }
+
+  @keyframes bloom{
+    0%   { transform: scale(0) rotate(-25deg); }
+    70%  { transform: scale(1.12) rotate(4deg); }
+    100% { transform: scale(1) rotate(0deg); }
+  }
+  @keyframes bloom-center{
+    0%   { transform: scale(0); }
+    100% { transform: scale(1); }
+  }
+  @keyframes sway{
+    0%,100% { transform: rotate(-2.5deg); }
+    50%     { transform: rotate(2.5deg); }
+  }
+
+  /* ---------- Card ---------- */
+  .card{
+    position:relative;
+    background: var(--cream);
+    border-radius: 28px;
+    padding: 40px clamp(20px, 6vw, 56px) 44px;
+    margin: 18px 0 10px;
+    box-shadow: 0 20px 50px -20px rgba(194,24,91,0.35);
+    border: 1px solid rgba(194,24,91,0.08);
+    max-width: 560px;
+  }
+
+  .thanks{
+    font-family:'Playfair Display', serif;
+    font-weight:700;
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
+    color: var(--rose-deep);
+    margin: 0 0 18px;
+  }
+
+  .photo-frame{
+    width: 100%;
+    max-width: 340px;
+    aspect-ratio: 1 / 1;
+    margin: 0 auto 22px;
+    border-radius: 20px;
+    overflow:hidden;
+    border: 6px solid var(--cream);
+    box-shadow: 0 0 0 2px var(--rose-light), 0 14px 30px -12px rgba(194,24,91,0.4);
+  }
+  .photo-frame img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+  }
+
+  .promise{
+    font-size: clamp(1rem, 2.6vw, 1.15rem);
+    line-height:1.6;
+    font-style:italic;
+    color: var(--ink);
+    margin: 0 0 26px;
+  }
+
+  .love{
+    font-family:'Playfair Display', serif;
+    font-style:italic;
+    font-weight:600;
+    font-size: clamp(2.2rem, 7vw, 3.4rem);
+    color: var(--rose-deep);
+    margin: 0;
+    text-shadow: 0 2px 0 rgba(255,255,255,0.6);
+  }
+
+  .stem-divider{
+    width:2px;
+    height:34px;
+    background: linear-gradient(var(--leaf), transparent);
+    margin: 10px auto;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .flower .petals, .flower .center, .flower, .falling-petal{
+      animation: none !important;
+      transform: none !important;
+    }
+  }
+</style>
 </head>
-<body> 
-    <style>
-       body {
-        background-color: rgb(229, 213, 216);
-        background-repeat: no-repeat;
-        background-size: cover;
-         
-        }
-    </style>
+<body>
 
-<centre>
-   <img src="yourdream (1).png"  width="500px" height="500px"  style="max-width:100%;height:auto;"<a href="yes.html" ></a></centre>
+<div class="petal-field" id="petalField"></div>
 
-   <h1> Thank You! <br> "I PROMISE That ill always keep you happy and alive for rest of my life" </h1>
+<div class="stage">
 
-   <center><H1>I love you</H1></center>
+  <!-- Top row of blooming flowers -->
+  <div class="garden-row" aria-hidden="true">
 
+    <!-- Rose -->
+    <svg class="flower" viewBox="0 0 100 100">
+      <g class="petals" fill="var(--rose-mid)">
+        <ellipse cx="50" cy="30" rx="16" ry="24" transform="rotate(0 50 50)"/>
+        <ellipse cx="50" cy="30" rx="16" ry="24" transform="rotate(60 50 50)"/>
+        <ellipse cx="50" cy="30" rx="16" ry="24" transform="rotate(120 50 50)"/>
+        <ellipse cx="50" cy="30" rx="16" ry="24" transform="rotate(180 50 50)"/>
+        <ellipse cx="50" cy="30" rx="16" ry="24" transform="rotate(240 50 50)"/>
+        <ellipse cx="50" cy="30" rx="16" ry="24" transform="rotate(300 50 50)"/>
+      </g>
+      <circle class="center" cx="50" cy="50" r="11" fill="var(--rose-deep)"/>
+    </svg>
 
-  
+    <!-- Tulip -->
+    <svg class="flower" viewBox="0 0 100 100">
+      <g class="petals" fill="#e0507a">
+        <path d="M50 20 C35 30 32 55 50 65 C68 55 65 30 50 20 Z" transform="rotate(0 50 50)"/>
+        <path d="M50 20 C35 30 32 55 50 65 C68 55 65 30 50 20 Z" transform="rotate(120 50 50)"/>
+        <path d="M50 20 C35 30 32 55 50 65 C68 55 65 30 50 20 Z" transform="rotate(240 50 50)"/>
+      </g>
+      <circle class="center" cx="50" cy="55" r="6" fill="var(--gold)"/>
+    </svg>
 
+    <!-- Daisy (center flower, largest) -->
+    <svg class="flower" style="width:clamp(52px, 10vw, 78px);" viewBox="0 0 100 100">
+      <g class="petals" fill="#ffffff" stroke="#f3d3de" stroke-width="1">
+        <ellipse cx="50" cy="25" rx="10" ry="20" transform="rotate(0 50 50)"/>
+        <ellipse cx="50" cy="25" rx="10" ry="20" transform="rotate(45 50 50)"/>
+        <ellipse cx="50" cy="25" rx="10" ry="20" transform="rotate(90 50 50)"/>
+        <ellipse cx="50" cy="25" rx="10" ry="20" transform="rotate(135 50 50)"/>
+        <ellipse cx="50" cy="25" rx="10" ry="20" transform="rotate(180 50 50)"/>
+        <ellipse cx="50" cy="25" rx="10" ry="20" transform="rotate(225 50 50)"/>
+        <ellipse cx="50" cy="25" rx="10" ry="20" transform="rotate(270 50 50)"/>
+        <ellipse cx="50" cy="25" rx="10" ry="20" transform="rotate(315 50 50)"/>
+      </g>
+      <circle class="center" cx="50" cy="50" r="13" fill="var(--gold)"/>
+    </svg>
+
+    <!-- Sunflower -->
+    <svg class="flower" viewBox="0 0 100 100">
+      <g class="petals" fill="#f4b942">
+        <ellipse cx="50" cy="28" rx="11" ry="22" transform="rotate(0 50 50)"/>
+        <ellipse cx="50" cy="28" rx="11" ry="22" transform="rotate(51 50 50)"/>
+        <ellipse cx="50" cy="28" rx="11" ry="22" transform="rotate(102 50 50)"/>
+        <ellipse cx="50" cy="28" rx="11" ry="22" transform="rotate(153 50 50)"/>
+        <ellipse cx="50" cy="28" rx="11" ry="22" transform="rotate(204 50 50)"/>
+        <ellipse cx="50" cy="28" rx="11" ry="22" transform="rotate(255 50 50)"/>
+        <ellipse cx="50" cy="28" rx="11" ry="22" transform="rotate(306 50 50)"/>
+      </g>
+      <circle class="center" cx="50" cy="50" r="14" fill="#6b4226"/>
+    </svg>
+
+    <!-- Rose (mirrored) -->
+    <svg class="flower" viewBox="0 0 100 100">
+      <g class="petals" fill="var(--rose-mid)">
+        <ellipse cx="50" cy="30" rx="16" ry="24" transform="rotate(0 50 50)"/>
+        <ellipse cx="50" cy="30" rx="16" ry="24" transform="rotate(60 50 50)"/>
+        <ellipse cx="50" cy="30" rx="16" ry="24" transform="rotate(120 50 50)"/>
+        <ellipse cx="50" cy="30" rx="16" ry="24" transform="rotate(180 50 50)"/>
+        <ellipse cx="50" cy="30" rx="16" ry="24" transform="rotate(240 50 50)"/>
+        <ellipse cx="50" cy="30" rx="16" ry="24" transform="rotate(300 50 50)"/>
+      </g>
+      <circle class="center" cx="50" cy="50" r="11" fill="var(--rose-deep)"/>
+    </svg>
+
+  </div>
+
+  <div class="stem-divider"></div>
+
+  <!-- Card with photo + message -->
+  <div class="card">
+    <p class="thanks">Thank You! 💗</p>
+
+    <div class="photo-frame">
+      <img src="yourdream (1).png" alt="Us">
+    </div>
+
+    <p class="promise">"I promise that I'll always keep you happy and alive for the rest of my life."</p>
+
+    <p class="love">I love you</p>
+  </div>
+
+  <div class="stem-divider"></div>
+
+  <!-- Bottom row of blooming flowers -->
+  <div class="garden-row" aria-hidden="true">
+    <svg class="flower" viewBox="0 0 100 100">
+      <g class="petals" fill="#e0507a">
+        <path d="M50 20 C35 30 32 55 50 65 C68 55 65 30 50 20 Z" transform="rotate(0 50 50)"/>
+        <path d="M50 20 C35 30 32 55 50 65 C68 55 65 30 50 20 Z" transform="rotate(120 50 50)"/>
+        <path d="M50 20 C35 30 32 55 50 65 C68 55 65 30 50 20 Z" transform="rotate(240 50 50)"/>
+      </g>
+      <circle class="center" cx="50" cy="55" r="6" fill="var(--gold)"/>
+    </svg>
+
+    <svg class="flower" viewBox="0 0 100 100">
+      <g class="petals" fill="var(--rose-mid)">
+        <ellipse cx="50" cy="30" rx="16" ry="24" transform="rotate(0 50 50)"/>
+        <ellipse cx="50" cy="30" rx="16" ry="24" transform="rotate(60 50 50)"/>
+        <ellipse cx="50" cy="30" rx="16" ry="24" transform="rotate(120 50 50)"/>
+        <ellipse cx="50" cy="30" rx="16" ry="24" transform="rotate(180 50 50)"/>
+        <ellipse cx="50" cy="30" rx="16" ry="24" transform="rotate(240 50 50)"/>
+        <ellipse cx="50" cy="30" rx="16" ry="24" transform="rotate(300 50 50)"/>
+      </g>
+      <circle class="center" cx="50" cy="50" r="11" fill="var(--rose-deep)"/>
+    </svg>
+
+    <svg class="flower" style="width:clamp(52px, 10vw, 78px);" viewBox="0 0 100 100">
+      <g class="petals" fill="#ffffff" stroke="#f3d3de" stroke-width="1">
+        <ellipse cx="50" cy="25" rx="10" ry="20" transform="rotate(0 50 50)"/>
+        <ellipse cx="50" cy="25" rx="10" ry="20" transform="rotate(45 50 50)"/>
+        <ellipse cx="50" cy="25" rx="10" ry="20" transform="rotate(90 50 50)"/>
+        <ellipse cx="50" cy="25" rx="10" ry="20" transform="rotate(135 50 50)"/>
+        <ellipse cx="50" cy="25" rx="10" ry="20" transform="rotate(180 50 50)"/>
+        <ellipse cx="50" cy="25" rx="10" ry="20" transform="rotate(225 50 50)"/>
+        <ellipse cx="50" cy="25" rx="10" ry="20" transform="rotate(270 50 50)"/>
+        <ellipse cx="50" cy="25" rx="10" ry="20" transform="rotate(315 50 50)"/>
+      </g>
+      <circle class="center" cx="50" cy="50" r="13" fill="var(--gold)"/>
+    </svg>
+
+    <svg class="flower" viewBox="0 0 100 100">
+      <g class="petals" fill="#f4b942">
+        <ellipse cx="50" cy="28" rx="11" ry="22" transform="rotate(0 50 50)"/>
+        <ellipse cx="50" cy="28" rx="11" ry="22" transform="rotate(51 50 50)"/>
+        <ellipse cx="50" cy="28" rx="11" ry="22" transform="rotate(102 50 50)"/>
+        <ellipse cx="50" cy="28" rx="11" ry="22" transform="rotate(153 50 50)"/>
+        <ellipse cx="50" cy="28" rx="11" ry="22" transform="rotate(204 50 50)"/>
+        <ellipse cx="50" cy="28" rx="11" ry="22" transform="rotate(255 50 50)"/>
+        <ellipse cx="50" cy="28" rx="11" ry="22" transform="rotate(306 50 50)"/>
+      </g>
+      <circle class="center" cx="50" cy="50" r="14" fill="#6b4226"/>
+    </svg>
+
+    <svg class="flower" viewBox="0 0 100 100">
+      <g class="petals" fill="var(--rose-mid)">
+        <ellipse cx="50" cy="30" rx="16" ry="24" transform="rotate(0 50 50)"/>
+        <ellipse cx="50" cy="30" rx="16" ry="24" transform="rotate(60 50 50)"/>
+        <ellipse cx="50" cy="30" rx="16" ry="24" transform="rotate(120 50 50)"/>
+        <ellipse cx="50" cy="30" rx="16" ry="24" transform="rotate(180 50 50)"/>
+        <ellipse cx="50" cy="30" rx="16" ry="24" transform="rotate(240 50 50)"/>
+        <ellipse cx="50" cy="30" rx="16" ry="24" transform="rotate(300 50 50)"/>
+      </g>
+      <circle class="center" cx="50" cy="50" r="11" fill="var(--rose-deep)"/>
+    </svg>
+  </div>
+
+</div>
+
+<script>
+  // Generate soft falling petals in the background
+  const field = document.getElementById('petalField');
+  const petalCount = 22;
+  for (let i = 0; i < petalCount; i++) {
+    const p = document.createElement('div');
+    p.className = 'falling-petal';
+    const left = Math.random() * 100;
+    const duration = 8 + Math.random() * 9;
+    const delay = Math.random() * 10;
+    const size = 8 + Math.random() * 10;
+    const hue = Math.random() > 0.5 ? 'var(--rose-light)' : '#f7cfe0';
+    p.style.left = left + 'vw';
+    p.style.width = size + 'px';
+    p.style.height = size + 'px';
+    p.style.background = hue;
+    p.style.animationDuration = duration + 's';
+    p.style.animationDelay = delay + 's';
+    field.appendChild(p);
+  }
+
+  // Fire a gentle confetti burst once the page loads
+  window.addEventListener('load', () => {
+    if (window.ConfettiGenerator) {
+      const confettiSettings = {
+        target: 'confetti-canvas',
+        max: 60,
+        size: 1,
+        animate: true,
+        props: ['circle', 'square'],
+        colors: [[199,21,133],[247,184,204],[226,168,87],[255,255,255]],
+        clock: 30,
+        respawn: false
+      };
+      const canvas = document.createElement('canvas');
+      canvas.id = 'confetti-canvas';
+      canvas.style.position = 'fixed';
+      canvas.style.inset = '0';
+      canvas.style.zIndex = '3';
+      canvas.style.pointerEvents = 'none';
+      document.body.appendChild(canvas);
+      const confetti = new ConfettiGenerator(confettiSettings);
+      confetti.render();
+      setTimeout(() => confetti.clear(), 6000);
+    }
+  });
+</script>
 
 </body>
 </html>
